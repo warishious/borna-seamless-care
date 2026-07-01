@@ -77,14 +77,22 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Borna Care — Modern healthcare starts with a better patient experience" },
+      {
+        name: "description",
+        content:
+          "One connected platform for every patient, every provider, and every clinic. Online scheduling, digital forms, secure messaging, and payments — all in one place.",
+      },
+      { name: "author", content: "Borna Care" },
+      { property: "og:title", content: "Borna Care — The healthcare operating system" },
+      {
+        property: "og:description",
+        content:
+          "Give patients the convenience they expect while giving your team the tools they deserve. One platform. One workflow. One connected healthcare experience.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "theme-color", content: "#0e0a1e" },
     ],
     links: [
       {
