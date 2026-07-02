@@ -206,9 +206,9 @@ function Hero() {
           >
             <defs>
               <linearGradient id="flow" x1="0" x2="1">
-                <stop offset="0%" stopColor="oklch(0.72 0.24 305)" stopOpacity="0" />
-                <stop offset="50%" stopColor="oklch(0.72 0.24 305)" stopOpacity="0.7" />
-                <stop offset="100%" stopColor="oklch(0.72 0.24 305)" stopOpacity="0" />
+                <stop offset="0%" stopColor="oklch(0.72 0.15 152)" stopOpacity="0" />
+                <stop offset="50%" stopColor="oklch(0.72 0.15 152)" stopOpacity="0.7" />
+                <stop offset="100%" stopColor="oklch(0.72 0.15 152)" stopOpacity="0" />
               </linearGradient>
             </defs>
             <motion.path
@@ -232,7 +232,7 @@ function PatientPhoneMock() {
     <div className="relative mx-auto w-full max-w-[300px]">
       <div
         className="relative rounded-[2.5rem] border border-white/10 p-3 animate-float-slow"
-        style={{ background: "linear-gradient(180deg, oklch(0.22 0.05 285), oklch(0.16 0.04 275))", boxShadow: "var(--shadow-elevated), 0 0 80px -20px oklch(0.68 0.22 300 / 0.4)" }}
+        style={{ background: "linear-gradient(180deg, oklch(0.22 0.05 285), oklch(0.16 0.04 275))", boxShadow: "var(--shadow-elevated), 0 0 80px -20px oklch(0.68 0.15 152 / 0.4)" }}
       >
         <div className="rounded-[2rem] overflow-hidden bg-[oklch(0.12_0.03_275)] p-5">
           <div className="flex items-center justify-between text-[10px] text-white/60">
@@ -447,7 +447,7 @@ function Platform() {
                 <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-4 h-full flex flex-col items-center text-center gap-3">
                   <div
                     className="h-10 w-10 rounded-xl flex items-center justify-center"
-                    style={{ background: "var(--gradient-purple)", boxShadow: "0 0 20px -5px oklch(0.68 0.22 300 / 0.7)" }}
+                    style={{ background: "var(--gradient-purple)", boxShadow: "0 0 20px -5px oklch(0.68 0.15 152 / 0.7)" }}
                   >
                     <f.icon className="h-5 w-5 text-white" />
                   </div>
@@ -601,7 +601,7 @@ function Switch() {
               <div className="group glass-panel p-6 h-full relative overflow-hidden transition hover:border-white/20">
                 <div
                   className="absolute -top-24 -right-24 h-48 w-48 rounded-full opacity-0 group-hover:opacity-100 transition duration-700 blur-3xl"
-                  style={{ background: "oklch(0.55 0.25 300 / 0.4)" }}
+                  style={{ background: "oklch(0.55 0.15 152 / 0.4)" }}
                 />
                 <div className="relative">
                   <div
@@ -663,7 +663,7 @@ function Transformation() {
           </div>
           <div
             className="rounded-3xl p-8 relative overflow-hidden border border-white/15"
-            style={{ background: "linear-gradient(160deg, oklch(0.28 0.12 295 / 0.6), oklch(0.16 0.05 275))", boxShadow: "var(--shadow-glow)" }}
+            style={{ background: "linear-gradient(160deg, oklch(0.28 0.12 152 / 0.6), oklch(0.16 0.05 275))", boxShadow: "var(--shadow-glow)" }}
           >
             <p className="text-xs uppercase tracking-widest text-white/60 mb-6 flex items-center gap-2">
               <Sparkles className="h-3 w-3" /> With Borna Care
@@ -733,7 +733,7 @@ function Scale() {
                 <motion.path
                   key={i}
                   d={`M0,${20 + i * 45} C60,${20 + i * 45} 60,100 120,100`}
-                  stroke="oklch(0.72 0.24 305 / 0.6)"
+                  stroke="oklch(0.72 0.15 152 / 0.6)"
                   strokeWidth="1"
                   fill="none"
                   initial={{ pathLength: 0 }}
@@ -746,7 +746,7 @@ function Scale() {
 
             <div
               className="rounded-2xl p-6 text-center border border-white/15"
-              style={{ background: "linear-gradient(160deg, oklch(0.28 0.12 295 / 0.6), oklch(0.16 0.05 275))", boxShadow: "var(--shadow-glow)" }}
+              style={{ background: "linear-gradient(160deg, oklch(0.28 0.12 152 / 0.6), oklch(0.16 0.05 275))", boxShadow: "var(--shadow-glow)" }}
             >
               <p className="text-xs uppercase tracking-widest text-white/60">One Borna Dashboard</p>
               <div className="mt-4 space-y-2 text-sm text-white/85">
@@ -830,7 +830,7 @@ function FinalCTA() {
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(800px 500px at 50% 50%, oklch(0.4 0.25 300 / 0.5), transparent 60%), radial-gradient(600px 400px at 30% 30%, oklch(0.35 0.2 280 / 0.35), transparent 70%)",
+            "radial-gradient(800px 500px at 50% 50%, oklch(0.4 0.15 152 / 0.5), transparent 60%), radial-gradient(600px 400px at 30% 30%, oklch(0.35 0.15 152 / 0.35), transparent 70%)",
         }}
       />
       <div className="relative mx-auto max-w-4xl px-6 text-center">
