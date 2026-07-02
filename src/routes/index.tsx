@@ -12,7 +12,6 @@ import {
   Stethoscope,
   ShieldCheck,
   ArrowRight,
-  Play,
   Sparkles,
   Bell,
   CheckCircle2,
@@ -21,12 +20,37 @@ import {
   X,
   Check,
   Activity,
-  Network,
   BarChart3,
-  Bot,
   HeartPulse,
 } from "lucide-react";
 import logoUrl from "@/assets/borna-care-logo.svg";
+import patientDashboardImg from "@/assets/patient-dashboard.png";
+import adminMobileImg from "@/assets/admin-mobile-dashboard.png";
+
+/* ---------------- Admin Mobile Frame ---------------- */
+function AdminMobileFrame() {
+  return (
+    <div className="relative">
+      <div className="pointer-events-none absolute -inset-10 rounded-[3rem] blur-3xl opacity-70"
+        style={{ background: "radial-gradient(60% 60% at 50% 40%, rgba(46,114,73,0.4), transparent 70%)" }} />
+      <div className="relative w-[280px] h-[560px] rounded-[2.6rem] p-[10px] bg-gradient-to-b from-white/15 to-white/5 border border-white/15 shadow-[0_40px_100px_-30px_rgba(0,0,0,0.9)]">
+        <div className="relative w-full h-full rounded-[2.1rem] overflow-hidden bg-black">
+          <div className="absolute top-2 left-1/2 -translate-x-1/2 w-24 h-5 rounded-full bg-black z-10" />
+          <motion.img
+            src={adminMobileImg}
+            alt="Admin mobile dashboard"
+            className="w-full block select-none"
+            draggable={false}
+            animate={{ y: ["0%", "-55%", "0%"] }}
+            transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <div className="pointer-events-none absolute inset-0 rounded-[2.1rem]"
+            style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, transparent 12%, transparent 88%, rgba(0,0,0,0.35) 100%)" }} />
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export const Route = createFileRoute("/")({
   component: BornaLanding,
@@ -70,16 +94,18 @@ function MagneticButton({
   };
 
   const base =
-    "group relative inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-medium transition-all";
+    "group relative inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-all backdrop-blur-md";
   const styles =
     variant === "primary"
-      ? "text-white shadow-[0_10px_40px_-10px_oklch(0.68_0.22_300/0.6)] hover:shadow-[0_20px_60px_-10px_oklch(0.68_0.22_300/0.8)]"
-      : "text-white/90 border border-white/10 hover:bg-white/5";
+      ? "text-white shadow-[0_10px_40px_-10px_rgba(46,114,73,0.55)] hover:shadow-[0_20px_60px_-8px_rgba(46,114,73,0.85)] hover:-translate-y-0.5"
+      : "text-white/90 border border-white/15 bg-white/[0.03] hover:bg-white/[0.07] hover:border-white/25";
 
   return (
     <motion.a
       ref={ref}
       href={href}
+      target={href.startsWith("http") ? "_blank" : undefined}
+      rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
       onMouseMove={onMove}
       onMouseLeave={onLeave}
       style={{ x: sx, y: sy }}
@@ -89,7 +115,7 @@ function MagneticButton({
         <span
           aria-hidden
           className="absolute inset-0 -z-10 rounded-full"
-          style={{ backgroundImage: "var(--gradient-purple)" }}
+          style={{ backgroundImage: "var(--gradient-green)" }}
         />
       )}
       {children}
@@ -126,19 +152,29 @@ function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 
 function Nav() {
   return (
-    <header className="fixed top-4 left-1/2 z-50 -translate-x-1/2 w-[min(1100px,calc(100%-2rem))]">
-      <div className="glass-panel flex items-center justify-between px-4 py-2.5">
-        <a href="#top" className="flex items-center gap-2">
-          <img src={logoUrl} alt="Borna Care" className="h-6 w-auto" />
+    <header className="fixed top-4 left-1/2 z-50 -translate-x-1/2 w-[min(1180px,calc(100%-2rem))]">
+      <div className="glass-panel flex items-center justify-between px-5 py-3">
+        <a href="#top" className="flex items-center gap-2 shrink-0">
+          <img src={logoUrl} alt="Borna Care" className="h-9 md:h-10 w-auto" />
         </a>
         <nav className="hidden md:flex items-center gap-7 text-sm text-white/70">
           <a href="#platform" className="hover:text-white transition">Platform</a>
           <a href="#experiences" className="hover:text-white transition">Experiences</a>
           <a href="#switch" className="hover:text-white transition">Why switch</a>
           <a href="#scale" className="hover:text-white transition">Scale</a>
-          <a href="#ecosystem" className="hover:text-white transition">Ecosystem</a>
+          <a href="#delivers" className="hover:text-white transition">Value</a>
         </nav>
-        <MagneticButton>Book a Demo</MagneticButton>
+        <div className="flex items-center gap-2">
+          <a
+            href="https://care.borna.ai/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden sm:inline-flex items-center rounded-full border border-white/15 bg-white/[0.03] px-4 py-2 text-sm text-white/85 hover:bg-white/[0.07] hover:border-white/25 transition"
+          >
+            Sign In
+          </a>
+          <MagneticButton href="https://borna.ai/demo/">Book a Demo</MagneticButton>
+        </div>
       </div>
     </header>
   );
@@ -149,8 +185,7 @@ function Nav() {
 function Hero() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const yPatient = useTransform(scrollYProgress, [0, 1], [0, -80]);
-  const yClinic = useTransform(scrollYProgress, [0, 1], [0, -120]);
+  const yImage = useTransform(scrollYProgress, [0, 1], [0, -100]);
 
   return (
     <section
@@ -182,46 +217,29 @@ function Hero() {
         </Reveal>
         <Reveal delay={0.3}>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <MagneticButton>Book a Demo</MagneticButton>
-            <MagneticButton variant="ghost">
-              <Play className="h-4 w-4" /> Watch Product Tour
+            <MagneticButton href="https://borna.ai/demo/">Book a Trial</MagneticButton>
+            <MagneticButton variant="ghost" href="https://borna.ai/demo/">
+              Book a Demo
             </MagneticButton>
           </div>
         </Reveal>
 
-        {/* Split hero visual */}
-        <div className="relative mt-24 grid gap-6 md:grid-cols-[1fr_1.4fr] items-center">
-          <motion.div style={{ y: yPatient }}>
-            <PatientPhoneMock />
-          </motion.div>
-          <motion.div style={{ y: yClinic }}>
-            <ClinicDashboardMock />
-          </motion.div>
-
-          {/* Connecting energy */}
-          <svg
-            className="pointer-events-none absolute inset-0 hidden md:block"
-            preserveAspectRatio="none"
-            viewBox="0 0 800 400"
-          >
-            <defs>
-              <linearGradient id="flow" x1="0" x2="1">
-                <stop offset="0%" stopColor="oklch(0.72 0.24 305)" stopOpacity="0" />
-                <stop offset="50%" stopColor="oklch(0.72 0.24 305)" stopOpacity="0.7" />
-                <stop offset="100%" stopColor="oklch(0.72 0.24 305)" stopOpacity="0" />
-              </linearGradient>
-            </defs>
-            <motion.path
-              d="M280,180 C360,140 440,240 520,200"
-              stroke="url(#flow)"
-              strokeWidth="1.5"
-              fill="none"
-              initial={{ pathLength: 0 }}
-              whileInView={{ pathLength: 1 }}
-              transition={{ duration: 2, ease: "easeInOut" }}
-            />
-          </svg>
-        </div>
+        {/* Hero visual — Patient Dashboard */}
+        <motion.div style={{ y: yImage }} className="relative mt-20">
+          <div className="pointer-events-none absolute -inset-10 rounded-[3rem] blur-3xl opacity-70"
+            style={{ background: "radial-gradient(60% 60% at 50% 40%, rgba(46,114,73,0.35), transparent 70%)" }} />
+          <div className="relative rounded-[2rem] border border-white/10 bg-white/[0.03] p-2 md:p-3 shadow-[0_40px_120px_-40px_rgba(0,0,0,0.9),0_0_60px_-20px_rgba(46,114,73,0.4)] backdrop-blur-md">
+            <div className="rounded-[1.6rem] overflow-hidden bg-black/40">
+              <img
+                src={patientDashboardImg}
+                alt="Borna Care patient dashboard"
+                className="w-full h-auto block"
+                loading="eager"
+              />
+            </div>
+            <div className="pointer-events-none absolute inset-0 rounded-[2rem] ring-1 ring-inset ring-white/10" />
+          </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -232,7 +250,7 @@ function PatientPhoneMock() {
     <div className="relative mx-auto w-full max-w-[300px]">
       <div
         className="relative rounded-[2.5rem] border border-white/10 p-3 animate-float-slow"
-        style={{ background: "linear-gradient(180deg, oklch(0.22 0.05 285), oklch(0.16 0.04 275))", boxShadow: "var(--shadow-elevated), 0 0 80px -20px oklch(0.68 0.22 300 / 0.4)" }}
+        style={{ background: "linear-gradient(180deg, oklch(0.22 0.05 285), oklch(0.16 0.04 275))", boxShadow: "var(--shadow-elevated), 0 0 80px -20px oklch(0.68 0.15 152 / 0.4)" }}
       >
         <div className="rounded-[2rem] overflow-hidden bg-[oklch(0.12_0.03_275)] p-5">
           <div className="flex items-center justify-between text-[10px] text-white/60">
@@ -447,7 +465,7 @@ function Platform() {
                 <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-4 h-full flex flex-col items-center text-center gap-3">
                   <div
                     className="h-10 w-10 rounded-xl flex items-center justify-center"
-                    style={{ background: "var(--gradient-purple)", boxShadow: "0 0 20px -5px oklch(0.68 0.22 300 / 0.7)" }}
+                    style={{ background: "var(--gradient-purple)", boxShadow: "0 0 20px -5px oklch(0.68 0.15 152 / 0.7)" }}
                   >
                     <f.icon className="h-5 w-5 text-white" />
                   </div>
@@ -502,18 +520,24 @@ function Experiences() {
           </div>
         </Reveal>
 
-        <div className="mt-20 grid gap-6 lg:grid-cols-2">
+        <div className="mt-20 grid gap-6 lg:grid-cols-2 items-stretch">
           <Reveal>
-            <div className="glass-panel p-8 h-full">
+            <div className="glass-panel p-8 h-full flex flex-col">
               <p className="text-xs uppercase tracking-widest text-white/50">Patient Experience</p>
               <h3 className="mt-2 text-3xl text-white">Everything patients need.</h3>
-              <div className="mt-8 flex justify-center">
-                <PatientPhoneMock />
+              <div className="mt-8 flex-1 flex justify-center items-center">
+                <div className="relative w-full max-w-[360px]">
+                  <div className="pointer-events-none absolute -inset-8 rounded-[2.5rem] blur-3xl opacity-60"
+                    style={{ background: "radial-gradient(60% 60% at 50% 40%, rgba(46,114,73,0.35), transparent 70%)" }} />
+                  <div className="relative rounded-[2rem] border border-white/10 bg-white/[0.03] p-2 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.9)]">
+                    <img src={patientDashboardImg} alt="Patient dashboard" className="w-full h-auto rounded-[1.6rem] block" />
+                  </div>
+                </div>
               </div>
               <ul className="mt-8 grid grid-cols-2 gap-3">
                 {patient.map((p) => (
                   <li key={p} className="flex items-center gap-2 text-sm text-white/80">
-                    <CheckCircle2 className="h-4 w-4 text-[oklch(0.75_0.2_300)]" />
+                    <CheckCircle2 className="h-4 w-4 text-[oklch(0.75_0.15_152)]" />
                     {p}
                   </li>
                 ))}
@@ -521,16 +545,16 @@ function Experiences() {
             </div>
           </Reveal>
           <Reveal delay={0.1}>
-            <div className="glass-panel p-8 h-full">
+            <div className="glass-panel p-8 h-full flex flex-col">
               <p className="text-xs uppercase tracking-widest text-white/50">Practice Experience</p>
               <h3 className="mt-2 text-3xl text-white">Everything clinics need.</h3>
-              <div className="mt-8">
-                <ClinicDashboardMock />
+              <div className="mt-8 flex-1 flex justify-center items-center">
+                <AdminMobileFrame />
               </div>
               <ul className="mt-8 grid grid-cols-2 gap-3">
                 {practice.map((p) => (
                   <li key={p} className="flex items-center gap-2 text-sm text-white/80">
-                    <CheckCircle2 className="h-4 w-4 text-[oklch(0.75_0.2_300)]" />
+                    <CheckCircle2 className="h-4 w-4 text-[oklch(0.75_0.15_152)]" />
                     {p}
                   </li>
                 ))}
@@ -601,7 +625,7 @@ function Switch() {
               <div className="group glass-panel p-6 h-full relative overflow-hidden transition hover:border-white/20">
                 <div
                   className="absolute -top-24 -right-24 h-48 w-48 rounded-full opacity-0 group-hover:opacity-100 transition duration-700 blur-3xl"
-                  style={{ background: "oklch(0.55 0.25 300 / 0.4)" }}
+                  style={{ background: "oklch(0.55 0.15 152 / 0.4)" }}
                 />
                 <div className="relative">
                   <div
@@ -663,7 +687,7 @@ function Transformation() {
           </div>
           <div
             className="rounded-3xl p-8 relative overflow-hidden border border-white/15"
-            style={{ background: "linear-gradient(160deg, oklch(0.28 0.12 295 / 0.6), oklch(0.16 0.05 275))", boxShadow: "var(--shadow-glow)" }}
+            style={{ background: "linear-gradient(160deg, oklch(0.28 0.12 152 / 0.6), oklch(0.16 0.05 275))", boxShadow: "var(--shadow-glow)" }}
           >
             <p className="text-xs uppercase tracking-widest text-white/60 mb-6 flex items-center gap-2">
               <Sparkles className="h-3 w-3" /> With Borna Care
@@ -733,7 +757,7 @@ function Scale() {
                 <motion.path
                   key={i}
                   d={`M0,${20 + i * 45} C60,${20 + i * 45} 60,100 120,100`}
-                  stroke="oklch(0.72 0.24 305 / 0.6)"
+                  stroke="oklch(0.72 0.15 152 / 0.6)"
                   strokeWidth="1"
                   fill="none"
                   initial={{ pathLength: 0 }}
@@ -746,7 +770,7 @@ function Scale() {
 
             <div
               className="rounded-2xl p-6 text-center border border-white/15"
-              style={{ background: "linear-gradient(160deg, oklch(0.28 0.12 295 / 0.6), oklch(0.16 0.05 275))", boxShadow: "var(--shadow-glow)" }}
+              style={{ background: "linear-gradient(160deg, oklch(0.28 0.12 152 / 0.6), oklch(0.16 0.05 275))", boxShadow: "var(--shadow-glow)" }}
             >
               <p className="text-xs uppercase tracking-widest text-white/60">One Borna Dashboard</p>
               <div className="mt-4 space-y-2 text-sm text-white/85">
@@ -762,59 +786,79 @@ function Scale() {
   );
 }
 
-/* ---------------- Ecosystem ---------------- */
+/* ---------------- Delivers ---------------- */
 
-function Ecosystem() {
-  const modules = [
-    { icon: HeartPulse, name: "Borna Care", note: "Patient & practice" },
-    { icon: MessageSquare, name: "Communication", note: "Secure messaging" },
-    { icon: Users, name: "CRM", note: "Patient relationships" },
-    { icon: BarChart3, name: "Analytics", note: "Practice intelligence" },
-    { icon: Bot, name: "AI Automation", note: "Intake, triage, follow-up" },
-    { icon: Network, name: "Future modules", note: "Growing with you" },
+function Delivers() {
+  const items = [
+    {
+      icon: ClipboardList,
+      title: "Reduce administrative workload",
+      body: "Eliminate manual scheduling and paper forms.",
+    },
+    {
+      icon: HeartPulse,
+      title: "Improve patient experience",
+      body: "Self-service booking and digital communications.",
+    },
+    {
+      icon: Clock,
+      title: "Increase appointment efficiency",
+      body: "Reduce no-shows with automated reminders.",
+    },
+    {
+      icon: CreditCard,
+      title: "Recover more revenue",
+      body: "Frictionless online payment requests.",
+    },
   ];
   return (
-    <section id="ecosystem" className="relative py-32 overflow-hidden">
-      <GlowOrb className="left-1/2 -translate-x-1/2 top-1/4 h-[500px] w-[800px] bg-[oklch(0.5_0.25_300/0.2)]" />
+    <section id="delivers" className="relative py-32 overflow-hidden">
+      <GlowOrb className="left-1/2 -translate-x-1/2 top-1/4 h-[520px] w-[820px] bg-[oklch(0.5_0.15_152/0.22)]" />
       <div className="relative mx-auto max-w-6xl px-6">
         <Reveal>
           <div className="text-center">
-            <SectionEyebrow>The Borna Ecosystem</SectionEyebrow>
+            <SectionEyebrow>Outcomes</SectionEyebrow>
             <h2 className="mt-6 mx-auto max-w-3xl text-4xl md:text-6xl text-white leading-[1.05]">
-              Not just a portal.
+              What Borna Care delivers
               <br />
-              <span className="text-gradient-purple italic">A healthcare operating system.</span>
+              <span className="text-gradient-purple italic">for your clinic.</span>
             </h2>
-            <p className="mt-6 mx-auto max-w-xl text-white/60">
-              Patients stay connected while your technology grows with you.
-            </p>
           </div>
         </Reveal>
 
-        <div className="mt-20 relative">
-          <div className="grid gap-4 md:grid-cols-3">
-            {modules.map((m, i) => (
-              <Reveal key={m.name} delay={i * 0.05}>
-                <div className="glass-panel p-6 h-full">
-                  <div className="flex items-center gap-3">
-                    <div
-                      className="h-10 w-10 rounded-xl flex items-center justify-center"
-                      style={{ background: "var(--gradient-purple)" }}
-                    >
-                      <m.icon className="h-5 w-5 text-white" />
-                    </div>
-                    <div>
-                      <p className="text-white">{m.name}</p>
-                      <p className="text-xs text-white/50">{m.note}</p>
-                    </div>
+        <div className="mt-20 grid gap-5 md:grid-cols-2">
+          {items.map((m, i) => (
+            <Reveal key={m.title} delay={i * 0.07}>
+              <motion.div
+                whileHover={{ y: -6 }}
+                transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                className="group relative glass-panel p-8 h-full overflow-hidden"
+              >
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full blur-3xl opacity-0 group-hover:opacity-70 transition-opacity duration-500"
+                  style={{ background: "radial-gradient(circle, rgba(46,114,73,0.55), transparent 70%)" }}
+                />
+                <div className="relative flex items-start gap-5">
+                  <div
+                    className="shrink-0 h-14 w-14 rounded-2xl flex items-center justify-center shadow-[0_10px_30px_-10px_rgba(46,114,73,0.7)]"
+                    style={{ background: "var(--gradient-green)" }}
+                  >
+                    <m.icon className="h-6 w-6 text-white" />
                   </div>
-                  <div className="mt-5 flex items-center gap-2 text-xs text-white/50">
-                    <ShieldCheck className="h-3 w-3" /> HIPAA-ready · Connected
+                  <div className="flex-1">
+                    <h3 className="text-2xl text-white leading-snug">{m.title}</h3>
+                    <p className="mt-3 text-white/65">{m.body}</p>
+                    <div className="mt-6 h-px w-full bg-gradient-to-r from-white/10 via-white/5 to-transparent" />
+                    <div className="mt-4 flex items-center gap-2 text-sm text-white/60 group-hover:text-white transition">
+                      <span className="inline-flex h-1.5 w-1.5 rounded-full" style={{ background: "var(--gradient-green)" }} />
+                      Built-in with Borna Care
+                    </div>
                   </div>
                 </div>
-              </Reveal>
-            ))}
-          </div>
+              </motion.div>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>
@@ -830,7 +874,7 @@ function FinalCTA() {
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(800px 500px at 50% 50%, oklch(0.4 0.25 300 / 0.5), transparent 60%), radial-gradient(600px 400px at 30% 30%, oklch(0.35 0.2 280 / 0.35), transparent 70%)",
+            "radial-gradient(800px 500px at 50% 50%, oklch(0.4 0.15 152 / 0.5), transparent 60%), radial-gradient(600px 400px at 30% 30%, oklch(0.35 0.15 152 / 0.35), transparent 70%)",
         }}
       />
       <div className="relative mx-auto max-w-4xl px-6 text-center">
@@ -851,7 +895,7 @@ function FinalCTA() {
         </Reveal>
         <Reveal delay={0.2}>
           <div className="mt-10 flex items-center justify-center">
-            <MagneticButton>Book a Demo</MagneticButton>
+            <MagneticButton href="https://borna.ai/demo/">Book a Demo</MagneticButton>
           </div>
         </Reveal>
       </div>
@@ -861,16 +905,15 @@ function FinalCTA() {
 
 function Footer() {
   return (
-    <footer className="border-t border-white/5 py-10">
-      <div className="mx-auto max-w-6xl px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-white/50">
-        <div className="flex items-center gap-2">
-          <img src={logoUrl} alt="Borna Care" className="h-5 w-auto opacity-80" />
-          <span>· © {new Date().getFullYear()} Borna Care</span>
+    <footer className="border-t border-white/5 py-14">
+      <div className="mx-auto max-w-6xl px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-white/50">
+        <div className="flex items-center gap-3">
+          <img src={logoUrl} alt="Borna Care" className="h-12 w-auto" />
         </div>
         <div className="flex items-center gap-6">
-          <a href="#" className="hover:text-white transition">Privacy</a>
-          <a href="#" className="hover:text-white transition">Security</a>
-          <a href="#" className="hover:text-white transition">Contact</a>
+          <a href="https://care.borna.ai/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">Sign In</a>
+          <a href="https://borna.ai/demo/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">Book a Demo</a>
+          <span className="text-white/40">© {new Date().getFullYear()} Borna Care</span>
         </div>
       </div>
     </footer>
@@ -889,7 +932,7 @@ function BornaLanding() {
         <Switch />
         <Transformation />
         <Scale />
-        <Ecosystem />
+        <Delivers />
         <FinalCTA />
       </main>
       <Footer />
