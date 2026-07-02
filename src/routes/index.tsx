@@ -130,19 +130,29 @@ function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 
 function Nav() {
   return (
-    <header className="fixed top-4 left-1/2 z-50 -translate-x-1/2 w-[min(1100px,calc(100%-2rem))]">
-      <div className="glass-panel flex items-center justify-between px-4 py-2.5">
-        <a href="#top" className="flex items-center gap-2">
-          <img src={logoUrl} alt="Borna Care" className="h-6 w-auto" />
+    <header className="fixed top-4 left-1/2 z-50 -translate-x-1/2 w-[min(1180px,calc(100%-2rem))]">
+      <div className="glass-panel flex items-center justify-between px-5 py-3">
+        <a href="#top" className="flex items-center gap-2 shrink-0">
+          <img src={logoUrl} alt="Borna Care" className="h-9 md:h-10 w-auto" />
         </a>
         <nav className="hidden md:flex items-center gap-7 text-sm text-white/70">
           <a href="#platform" className="hover:text-white transition">Platform</a>
           <a href="#experiences" className="hover:text-white transition">Experiences</a>
           <a href="#switch" className="hover:text-white transition">Why switch</a>
           <a href="#scale" className="hover:text-white transition">Scale</a>
-          <a href="#ecosystem" className="hover:text-white transition">Ecosystem</a>
+          <a href="#delivers" className="hover:text-white transition">Value</a>
         </nav>
-        <MagneticButton>Book a Demo</MagneticButton>
+        <div className="flex items-center gap-2">
+          <a
+            href="https://care.borna.ai/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden sm:inline-flex items-center rounded-full border border-white/15 bg-white/[0.03] px-4 py-2 text-sm text-white/85 hover:bg-white/[0.07] hover:border-white/25 transition"
+          >
+            Sign In
+          </a>
+          <MagneticButton href="https://borna.ai/demo/">Book a Demo</MagneticButton>
+        </div>
       </div>
     </header>
   );
