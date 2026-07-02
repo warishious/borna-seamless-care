@@ -163,8 +163,7 @@ function Nav() {
 function Hero() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const yPatient = useTransform(scrollYProgress, [0, 1], [0, -80]);
-  const yClinic = useTransform(scrollYProgress, [0, 1], [0, -120]);
+  const yImage = useTransform(scrollYProgress, [0, 1], [0, -100]);
 
   return (
     <section
@@ -196,46 +195,29 @@ function Hero() {
         </Reveal>
         <Reveal delay={0.3}>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <MagneticButton>Book a Demo</MagneticButton>
-            <MagneticButton variant="ghost">
-              <Play className="h-4 w-4" /> Watch Product Tour
+            <MagneticButton href="https://borna.ai/demo/">Book a Trial</MagneticButton>
+            <MagneticButton variant="ghost" href="https://borna.ai/demo/">
+              Book a Demo
             </MagneticButton>
           </div>
         </Reveal>
 
-        {/* Split hero visual */}
-        <div className="relative mt-24 grid gap-6 md:grid-cols-[1fr_1.4fr] items-center">
-          <motion.div style={{ y: yPatient }}>
-            <PatientPhoneMock />
-          </motion.div>
-          <motion.div style={{ y: yClinic }}>
-            <ClinicDashboardMock />
-          </motion.div>
-
-          {/* Connecting energy */}
-          <svg
-            className="pointer-events-none absolute inset-0 hidden md:block"
-            preserveAspectRatio="none"
-            viewBox="0 0 800 400"
-          >
-            <defs>
-              <linearGradient id="flow" x1="0" x2="1">
-                <stop offset="0%" stopColor="oklch(0.72 0.15 152)" stopOpacity="0" />
-                <stop offset="50%" stopColor="oklch(0.72 0.15 152)" stopOpacity="0.7" />
-                <stop offset="100%" stopColor="oklch(0.72 0.15 152)" stopOpacity="0" />
-              </linearGradient>
-            </defs>
-            <motion.path
-              d="M280,180 C360,140 440,240 520,200"
-              stroke="url(#flow)"
-              strokeWidth="1.5"
-              fill="none"
-              initial={{ pathLength: 0 }}
-              whileInView={{ pathLength: 1 }}
-              transition={{ duration: 2, ease: "easeInOut" }}
-            />
-          </svg>
-        </div>
+        {/* Hero visual — Patient Dashboard */}
+        <motion.div style={{ y: yImage }} className="relative mt-20">
+          <div className="pointer-events-none absolute -inset-10 rounded-[3rem] blur-3xl opacity-70"
+            style={{ background: "radial-gradient(60% 60% at 50% 40%, rgba(46,114,73,0.35), transparent 70%)" }} />
+          <div className="relative rounded-[2rem] border border-white/10 bg-white/[0.03] p-2 md:p-3 shadow-[0_40px_120px_-40px_rgba(0,0,0,0.9),0_0_60px_-20px_rgba(46,114,73,0.4)] backdrop-blur-md">
+            <div className="rounded-[1.6rem] overflow-hidden bg-black/40">
+              <img
+                src={patientDashboardImg}
+                alt="Borna Care patient dashboard"
+                className="w-full h-auto block"
+                loading="eager"
+              />
+            </div>
+            <div className="pointer-events-none absolute inset-0 rounded-[2rem] ring-1 ring-inset ring-white/10" />
+          </div>
+        </motion.div>
       </div>
     </section>
   );
