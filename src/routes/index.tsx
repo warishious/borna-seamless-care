@@ -12,7 +12,6 @@ import {
   Stethoscope,
   ShieldCheck,
   ArrowRight,
-  Play,
   Sparkles,
   Bell,
   CheckCircle2,
@@ -21,9 +20,7 @@ import {
   X,
   Check,
   Activity,
-  Network,
   BarChart3,
-  Bot,
   HeartPulse,
 } from "lucide-react";
 import logoUrl from "@/assets/borna-care-logo.svg";
