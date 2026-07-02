@@ -30,6 +30,31 @@ import logoUrl from "@/assets/borna-care-logo.svg";
 import patientDashboardImg from "@/assets/patient-dashboard.png";
 import adminMobileImg from "@/assets/admin-mobile-dashboard.png";
 
+/* ---------------- Admin Mobile Frame ---------------- */
+function AdminMobileFrame() {
+  return (
+    <div className="relative">
+      <div className="pointer-events-none absolute -inset-10 rounded-[3rem] blur-3xl opacity-70"
+        style={{ background: "radial-gradient(60% 60% at 50% 40%, rgba(46,114,73,0.4), transparent 70%)" }} />
+      <div className="relative w-[280px] h-[560px] rounded-[2.6rem] p-[10px] bg-gradient-to-b from-white/15 to-white/5 border border-white/15 shadow-[0_40px_100px_-30px_rgba(0,0,0,0.9)]">
+        <div className="relative w-full h-full rounded-[2.1rem] overflow-hidden bg-black">
+          <div className="absolute top-2 left-1/2 -translate-x-1/2 w-24 h-5 rounded-full bg-black z-10" />
+          <motion.img
+            src={adminMobileImg}
+            alt="Admin mobile dashboard"
+            className="w-full block select-none"
+            draggable={false}
+            animate={{ y: ["0%", "-55%", "0%"] }}
+            transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <div className="pointer-events-none absolute inset-0 rounded-[2.1rem]"
+            style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, transparent 12%, transparent 88%, rgba(0,0,0,0.35) 100%)" }} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export const Route = createFileRoute("/")({
   component: BornaLanding,
 });
