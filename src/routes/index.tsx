@@ -27,6 +27,8 @@ import {
   HeartPulse,
 } from "lucide-react";
 import logoUrl from "@/assets/borna-care-logo.svg";
+import patientDashboardImg from "@/assets/patient-dashboard.png";
+import adminMobileImg from "@/assets/admin-mobile-dashboard.png";
 
 export const Route = createFileRoute("/")({
   component: BornaLanding,
@@ -70,16 +72,18 @@ function MagneticButton({
   };
 
   const base =
-    "group relative inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-medium transition-all";
+    "group relative inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-all backdrop-blur-md";
   const styles =
     variant === "primary"
-      ? "text-white shadow-[0_10px_40px_-10px_oklch(0.68_0.22_300/0.6)] hover:shadow-[0_20px_60px_-10px_oklch(0.68_0.22_300/0.8)]"
-      : "text-white/90 border border-white/10 hover:bg-white/5";
+      ? "text-white shadow-[0_10px_40px_-10px_rgba(46,114,73,0.55)] hover:shadow-[0_20px_60px_-8px_rgba(46,114,73,0.85)] hover:-translate-y-0.5"
+      : "text-white/90 border border-white/15 bg-white/[0.03] hover:bg-white/[0.07] hover:border-white/25";
 
   return (
     <motion.a
       ref={ref}
       href={href}
+      target={href.startsWith("http") ? "_blank" : undefined}
+      rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
       onMouseMove={onMove}
       onMouseLeave={onLeave}
       style={{ x: sx, y: sy }}
@@ -89,7 +93,7 @@ function MagneticButton({
         <span
           aria-hidden
           className="absolute inset-0 -z-10 rounded-full"
-          style={{ backgroundImage: "var(--gradient-purple)" }}
+          style={{ backgroundImage: "var(--gradient-green)" }}
         />
       )}
       {children}
