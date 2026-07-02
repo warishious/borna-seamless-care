@@ -789,59 +789,79 @@ function Scale() {
   );
 }
 
-/* ---------------- Ecosystem ---------------- */
+/* ---------------- Delivers ---------------- */
 
-function Ecosystem() {
-  const modules = [
-    { icon: HeartPulse, name: "Borna Care", note: "Patient & practice" },
-    { icon: MessageSquare, name: "Communication", note: "Secure messaging" },
-    { icon: Users, name: "CRM", note: "Patient relationships" },
-    { icon: BarChart3, name: "Analytics", note: "Practice intelligence" },
-    { icon: Bot, name: "AI Automation", note: "Intake, triage, follow-up" },
-    { icon: Network, name: "Future modules", note: "Growing with you" },
+function Delivers() {
+  const items = [
+    {
+      icon: ClipboardList,
+      title: "Reduce administrative workload",
+      body: "Eliminate manual scheduling and paper forms.",
+    },
+    {
+      icon: HeartPulse,
+      title: "Improve patient experience",
+      body: "Self-service booking and digital communications.",
+    },
+    {
+      icon: Clock,
+      title: "Increase appointment efficiency",
+      body: "Reduce no-shows with automated reminders.",
+    },
+    {
+      icon: CreditCard,
+      title: "Recover more revenue",
+      body: "Frictionless online payment requests.",
+    },
   ];
   return (
-    <section id="ecosystem" className="relative py-32 overflow-hidden">
-      <GlowOrb className="left-1/2 -translate-x-1/2 top-1/4 h-[500px] w-[800px] bg-[oklch(0.5_0.25_300/0.2)]" />
+    <section id="delivers" className="relative py-32 overflow-hidden">
+      <GlowOrb className="left-1/2 -translate-x-1/2 top-1/4 h-[520px] w-[820px] bg-[oklch(0.5_0.15_152/0.22)]" />
       <div className="relative mx-auto max-w-6xl px-6">
         <Reveal>
           <div className="text-center">
-            <SectionEyebrow>The Borna Ecosystem</SectionEyebrow>
+            <SectionEyebrow>Outcomes</SectionEyebrow>
             <h2 className="mt-6 mx-auto max-w-3xl text-4xl md:text-6xl text-white leading-[1.05]">
-              Not just a portal.
+              What Borna Care delivers
               <br />
-              <span className="text-gradient-purple italic">A healthcare operating system.</span>
+              <span className="text-gradient-purple italic">for your clinic.</span>
             </h2>
-            <p className="mt-6 mx-auto max-w-xl text-white/60">
-              Patients stay connected while your technology grows with you.
-            </p>
           </div>
         </Reveal>
 
-        <div className="mt-20 relative">
-          <div className="grid gap-4 md:grid-cols-3">
-            {modules.map((m, i) => (
-              <Reveal key={m.name} delay={i * 0.05}>
-                <div className="glass-panel p-6 h-full">
-                  <div className="flex items-center gap-3">
-                    <div
-                      className="h-10 w-10 rounded-xl flex items-center justify-center"
-                      style={{ background: "var(--gradient-purple)" }}
-                    >
-                      <m.icon className="h-5 w-5 text-white" />
-                    </div>
-                    <div>
-                      <p className="text-white">{m.name}</p>
-                      <p className="text-xs text-white/50">{m.note}</p>
-                    </div>
+        <div className="mt-20 grid gap-5 md:grid-cols-2">
+          {items.map((m, i) => (
+            <Reveal key={m.title} delay={i * 0.07}>
+              <motion.div
+                whileHover={{ y: -6 }}
+                transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                className="group relative glass-panel p-8 h-full overflow-hidden"
+              >
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full blur-3xl opacity-0 group-hover:opacity-70 transition-opacity duration-500"
+                  style={{ background: "radial-gradient(circle, rgba(46,114,73,0.55), transparent 70%)" }}
+                />
+                <div className="relative flex items-start gap-5">
+                  <div
+                    className="shrink-0 h-14 w-14 rounded-2xl flex items-center justify-center shadow-[0_10px_30px_-10px_rgba(46,114,73,0.7)]"
+                    style={{ background: "var(--gradient-green)" }}
+                  >
+                    <m.icon className="h-6 w-6 text-white" />
                   </div>
-                  <div className="mt-5 flex items-center gap-2 text-xs text-white/50">
-                    <ShieldCheck className="h-3 w-3" /> HIPAA-ready · Connected
+                  <div className="flex-1">
+                    <h3 className="text-2xl text-white leading-snug">{m.title}</h3>
+                    <p className="mt-3 text-white/65">{m.body}</p>
+                    <div className="mt-6 h-px w-full bg-gradient-to-r from-white/10 via-white/5 to-transparent" />
+                    <div className="mt-4 flex items-center gap-2 text-sm text-white/60 group-hover:text-white transition">
+                      <span className="inline-flex h-1.5 w-1.5 rounded-full" style={{ background: "var(--gradient-green)" }} />
+                      Built-in with Borna Care
+                    </div>
                   </div>
                 </div>
-              </Reveal>
-            ))}
-          </div>
+              </motion.div>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>
@@ -878,7 +898,7 @@ function FinalCTA() {
         </Reveal>
         <Reveal delay={0.2}>
           <div className="mt-10 flex items-center justify-center">
-            <MagneticButton>Book a Demo</MagneticButton>
+            <MagneticButton href="https://borna.ai/demo/">Book a Demo</MagneticButton>
           </div>
         </Reveal>
       </div>
@@ -888,16 +908,15 @@ function FinalCTA() {
 
 function Footer() {
   return (
-    <footer className="border-t border-white/5 py-10">
-      <div className="mx-auto max-w-6xl px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-white/50">
-        <div className="flex items-center gap-2">
-          <img src={logoUrl} alt="Borna Care" className="h-5 w-auto opacity-80" />
-          <span>· © {new Date().getFullYear()} Borna Care</span>
+    <footer className="border-t border-white/5 py-14">
+      <div className="mx-auto max-w-6xl px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-white/50">
+        <div className="flex items-center gap-3">
+          <img src={logoUrl} alt="Borna Care" className="h-12 w-auto" />
         </div>
         <div className="flex items-center gap-6">
-          <a href="#" className="hover:text-white transition">Privacy</a>
-          <a href="#" className="hover:text-white transition">Security</a>
-          <a href="#" className="hover:text-white transition">Contact</a>
+          <a href="https://care.borna.ai/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">Sign In</a>
+          <a href="https://borna.ai/demo/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">Book a Demo</a>
+          <span className="text-white/40">© {new Date().getFullYear()} Borna Care</span>
         </div>
       </div>
     </footer>
@@ -916,7 +935,7 @@ function BornaLanding() {
         <Switch />
         <Transformation />
         <Scale />
-        <Ecosystem />
+        <Delivers />
         <FinalCTA />
       </main>
       <Footer />
