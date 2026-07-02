@@ -498,18 +498,24 @@ function Experiences() {
           </div>
         </Reveal>
 
-        <div className="mt-20 grid gap-6 lg:grid-cols-2">
+        <div className="mt-20 grid gap-6 lg:grid-cols-2 items-stretch">
           <Reveal>
-            <div className="glass-panel p-8 h-full">
+            <div className="glass-panel p-8 h-full flex flex-col">
               <p className="text-xs uppercase tracking-widest text-white/50">Patient Experience</p>
               <h3 className="mt-2 text-3xl text-white">Everything patients need.</h3>
-              <div className="mt-8 flex justify-center">
-                <PatientPhoneMock />
+              <div className="mt-8 flex-1 flex justify-center items-center">
+                <div className="relative w-full max-w-[360px]">
+                  <div className="pointer-events-none absolute -inset-8 rounded-[2.5rem] blur-3xl opacity-60"
+                    style={{ background: "radial-gradient(60% 60% at 50% 40%, rgba(46,114,73,0.35), transparent 70%)" }} />
+                  <div className="relative rounded-[2rem] border border-white/10 bg-white/[0.03] p-2 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.9)]">
+                    <img src={patientDashboardImg} alt="Patient dashboard" className="w-full h-auto rounded-[1.6rem] block" />
+                  </div>
+                </div>
               </div>
               <ul className="mt-8 grid grid-cols-2 gap-3">
                 {patient.map((p) => (
                   <li key={p} className="flex items-center gap-2 text-sm text-white/80">
-                    <CheckCircle2 className="h-4 w-4 text-[oklch(0.75_0.2_300)]" />
+                    <CheckCircle2 className="h-4 w-4 text-[oklch(0.75_0.15_152)]" />
                     {p}
                   </li>
                 ))}
@@ -517,16 +523,16 @@ function Experiences() {
             </div>
           </Reveal>
           <Reveal delay={0.1}>
-            <div className="glass-panel p-8 h-full">
+            <div className="glass-panel p-8 h-full flex flex-col">
               <p className="text-xs uppercase tracking-widest text-white/50">Practice Experience</p>
               <h3 className="mt-2 text-3xl text-white">Everything clinics need.</h3>
-              <div className="mt-8">
-                <ClinicDashboardMock />
+              <div className="mt-8 flex-1 flex justify-center items-center">
+                <AdminMobileFrame />
               </div>
               <ul className="mt-8 grid grid-cols-2 gap-3">
                 {practice.map((p) => (
                   <li key={p} className="flex items-center gap-2 text-sm text-white/80">
-                    <CheckCircle2 className="h-4 w-4 text-[oklch(0.75_0.2_300)]" />
+                    <CheckCircle2 className="h-4 w-4 text-[oklch(0.75_0.15_152)]" />
                     {p}
                   </li>
                 ))}
